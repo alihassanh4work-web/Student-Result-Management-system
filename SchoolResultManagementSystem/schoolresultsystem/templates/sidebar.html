@@ -1,0 +1,110 @@
+{% load static %}
+<style>
+    .sidebar {
+        min-height: 100vh;
+    }
+    .sidebar .nav-link {
+        color:white;  
+    }
+    .sidebar .nav-link:hover {
+        color: #06268f;
+        background-color: #96999c;
+    }
+
+
+</style>
+
+
+
+
+<nav class="col-md-3 col-lg-2 sidebar bg-dark collapse d-md-block pt-3">
+<div class="text-white text-center">
+    <img src="{% static 'images/admin.jpg' %}" alt="Admin Image" class="rounded_circle mb-2" width="70" height="70">
+    <h6>Admin</h6>
+</div>    
+<ul class="nav flex-column">
+    <li class="nav-item">  
+        <a href="{% url 'admin_dashboard' %}" class="nav-link">Dashboard</a>
+    </li>
+     <li class="nav-item">  
+        <a href="#classesMenu" data-bs-toggle="collapse" class="nav-link">Classes</a>
+        <div class="collapse" id="classesMenu">
+            <ul class="nav flex-column ms-3">
+    <li class="nav-item">  
+        <a href="{% url 'Create_class' %}" class="nav-link">Create Class</a>
+    </li>
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Manage Class</a>
+    </li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="nav-item">  
+        <a href="#subjectsMenu" data-bs-toggle="collapse" class="nav-link">Subjects</a>
+        <div class="collapse" id="subjectsMenu">
+            <ul class="nav flex-column ms-3">
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Create Subject</a>
+    </li>
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Manage Subject</a>
+    </li>
+    <li class="nav-item">  
+        <a href="#" class="nav-link">subject combination</a>
+    </li>
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Manage combination</a>
+    </li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="nav-item">  
+        <a href="#studentsMenu" data-bs-toggle="collapse" class="nav-link">Students</a>
+        <div class="collapse" id="studentsMenu">
+            <ul class="nav flex-column ms-3">
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Create Student</a>
+    </li>
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Manage Student</a>
+    </li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="nav-item">  
+        <a href="#resultsMenu" data-bs-toggle="collapse" class="nav-link">Results</a>
+        <div class="collapse" id="resultsMenu">
+            <ul class="nav flex-column ms-3">
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Create Result</a>
+    </li>
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Manage Result</a>
+    </li>
+            </ul>
+        </div>
+    </li>
+
+<li class="nav-item">  
+        <a href="#noticeMenu" data-bs-toggle="collapse" class="nav-link">Notice</a>
+        <div class="collapse" id="noticeMenu">
+            <ul class="nav flex-column ms-3">
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Create Notice</a>
+    </li>
+    <li class="nav-item">  
+        <a href="#" class="nav-link">Manage Notice</a>
+    </li>
+            </ul>
+        </div>
+    </li>
+
+     <li class="nav-item">  
+        <a href="#" class="nav-link">Change Password</a>
+    </li>
+
+</ul>
+</nav>
