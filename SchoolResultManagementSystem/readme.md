@@ -101,6 +101,11 @@ Open:
 ```
 http://127.0.0.1:8000/
 ```
+##loom video link:
+
+```bash
+https://www.loom.com/share/d2fd379493164de88359921743acab2d
+```
 
 ## Future Improvements
 
