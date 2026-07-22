@@ -1,0 +1,130 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+<h2 class="mb-4">Declare Result</h2>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+
+    <!-- Class -->
+    <div class="mb-3">
+        <label>Select Class</label>
+        <select class="form-select" id="class" name="class" required>
+            <option value="">--Select Class--</option>
+            {% for c in classes %}
+            <option value="{{ c.id }}">
+                {{ c.class_name }} - Section {{ c.section }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Student -->
+    <div class="mb-3">
+        <label>Select Student</label>
+        <select class="form-select" id="student_id" name="student_id" required>
+            <option value="">--Select Student--</option>
+        </select>
+    </div>
+
+    <!-- Subjects -->
+    <div id="subject_fields"></div>
+
+    <button class="btn btn-success mt-3">
+        Add Result
+    </button>
+
+</form>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    document.getElementById("class").addEventListener("change", function(){
+
+        let classId = this.value;
+
+        let studentSelect = document.getElementById("student_id");
+        let subjectDiv = document.getElementById("subject_fields");
+
+        studentSelect.innerHTML =
+            '<option value="">Loading...</option>';
+
+        subjectDiv.innerHTML = "";
+
+        if(classId==""){
+            studentSelect.innerHTML =
+            '<option value="">--Select Student--</option>';
+            return;
+        }
+
+        fetch(`/get_students_subjects/?class_id=${classId}`)
+
+        .then(response=>response.json())
+
+        .then(data=>{
+
+            studentSelect.innerHTML =
+            '<option value="">--Select Student--</option>';
+
+            data.students.forEach(student=>{
+
+                studentSelect.innerHTML += `
+                    <option value="${student.id}">
+                        ${student.name} (Roll ID : ${student.roll_id})
+                    </option>
+                `;
+
+            });
+
+            data.subjects.forEach(subject=>{
+
+                subjectDiv.innerHTML += `
+
+                    <div class="mb-3">
+
+                        <label>${subject.name}</label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="marks_${subject.id}"
+                            placeholder="Enter Marks"
+                            min="0"
+                            max="100"
+                            required>
+
+                    </div>
+
+                `;
+
+            });
+
+        })
+
+        .catch(error=>{
+
+            console.log(error);
+
+        });
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

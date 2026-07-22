@@ -1,0 +1,64 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+<h2 class="mb-4">Add Student</h2>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="fullname" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="fullname" name="fullname" required placeholder="Enter Full Name">
+    </div>
+
+    <div class="mb-3">
+        <label for="rollid" class="form-label">Roll ID</label>
+        <input type="alphanumeric" class="form-control" id="rollid" name="rollid" required placeholder="Enter the Roll ID" maxlenght="5">
+    </div>
+
+    <div class="mb-3">
+        <label for="emailid" class="form-label">Email ID</label>
+        <input type="email" class="form-control" id="emailid" name="emailid" required placeholder="Enter the email ID">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Gender</label><br>
+        <div class="form-check form-check-inline">
+        <input type="radio" checked class="form-check-input " id="gender" name="gender" required value="Male">
+        <label class="form-check-label">Male</label>
+        <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input " id="gender" name="gender" required value="Female">
+        <label class="form-check-label">Female</label> 
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="class" class="form-label">Select Class</label>
+        <select class="form-select" id="class" name="class" required>
+            <option value="">--Select Class--</option>
+            {% for c in classes %}
+            <option value="{{c.id}}">{{c.class_name}}- Section{{c.section}}</option>
+             {% endfor %} 
+        </select>
+    </div>
+
+<div class="mb-3">
+        <label for="dob" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" id="dob" name="dob" required placeholder="Enter the Date of Birth">
+    </div>
+
+
+    <button type="submit" class="btn btn-success">Add Student</button>
+    
+</form>
+</div>
+
+
+{% endblock %}
