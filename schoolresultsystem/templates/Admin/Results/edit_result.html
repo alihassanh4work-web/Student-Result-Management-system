@@ -1,0 +1,90 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h3>Edit Student Result</h3>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="card mb-3">
+        <div class="card-body">
+
+            <p><strong>Student Name :</strong> {{ student.name }}</p>
+            <p><strong>Roll ID :</strong> {{ student.roll_id }}</p>
+            <p><strong>Class :</strong> {{ student.Student_class }}</p>
+
+        </div>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for result in results %}
+
+                <tr>
+
+                    <td>{{ forloop.counter }}</td>
+
+                    <td>{{ result.subjects.subject_name }}</td>
+
+                    <td>
+                        <input
+                            type="number"
+                            name="marks_{{ result.id }}"
+                            value="{{ result.marks }}"
+                            class="form-control"
+                            min="0"
+                            max="100"
+                            required>
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="3" class="text-center">
+                        No Result Found
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <button type="submit" class="btn btn-success">
+            Update Result
+        </button>
+
+        <a href="{% url 'manage_result' %}" class="btn btn-secondary">
+            Back
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

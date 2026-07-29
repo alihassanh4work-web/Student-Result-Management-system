@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header class="py-3 bg-dark text-white">
+      <div class="container text-center text-white">
+        <h1 class="display-4 fw-bold">Student Result Management System</h1>
+        <p class="lead">Manage and view student results with ease</p>
+      </div>
+    </header>
+
+    <section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-4">Notice Board</h2>
+
+        <div class="bg-light p-4 rounded shadow">
+
+            <marquee direction="up"
+                     scrollamount="2"
+                     height="250"
+                     onmouseover="this.stop();"
+                     onmouseout="this.start();">
+
+                {% for notice in notices %}
+
+                    <div class="mb-3">
+
+                        <h5 class="text-primary">
+                            {{ notice.title }}
+                        </h5>
+
+                        <p>
+                            {{ notice.details }}
+                        </p>
+
+                        <small class="text-muted">
+                            Posted on:
+                            {{ notice.posting_date|date:"d M Y h:i A" }}
+                        </small>
+
+                        <hr>
+
+                    </div>
+
+                {% empty %}
+
+                    <p class="text-center">
+                        No Notices Available
+                    </p>
+
+                {% endfor %}
+
+            </marquee>
+
+        </div>
+
+    </div>
+</section>
+    {% endblock %}
+    

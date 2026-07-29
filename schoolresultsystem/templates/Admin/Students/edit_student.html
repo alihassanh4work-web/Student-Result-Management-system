@@ -1,0 +1,137 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="mb-4">Edit Student Info</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text"
+                   class="form-control"
+                   name="fullname"
+                   value="{{ student_obj.name }}"
+                   required>
+        </div>
+
+        <!-- Roll ID -->
+        <div class="mb-3">
+            <label class="form-label">Roll ID</label>
+            <input type="text"
+                   class="form-control"
+                   name="rollid"
+                   value="{{ student_obj.roll_id }}"
+                   maxlength="30"
+                   required>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email"
+                   class="form-control"
+                   name="email"
+                   value="{{ student_obj.Email }}"
+                   required>
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-3">
+            <label class="form-label">Gender</label><br>
+
+            <input type="radio"
+                   id="male"
+                   name="gender"
+                   value="Male"
+                   {% if student_obj.gender == "Male" %}checked{% endif %}>
+            <label for="male">Male</label>
+
+            &nbsp;&nbsp;
+
+            <input type="radio"
+                   id="female"
+                   name="gender"
+                   value="Female"
+                   {% if student_obj.gender == "Female" %}checked{% endif %}>
+            <label for="female">Female</label>
+        </div>
+
+        <!-- Class -->
+        <div class="mb-3">
+            <label class="form-label">Class</label>
+
+            <select name="class" class="form-control" required>
+
+                {% for c in classes %}
+
+                    <option value="{{ c.id }}"
+                        {% if student_obj.Student_class.id == c.id %}
+                            selected
+                        {% endif %}>
+
+                        {{ c.class_name }} - {{ c.section }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="mb-3">
+            <label class="form-label">Date of Birth</label>
+            <input type="date"
+                   class="form-control"
+                   name="dob"
+                   value="{{ student_obj.Date_of_birth|date:'Y-m-d' }}"
+                   required>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-3">
+            <label class="form-label">Status</label><br>
+
+            <input type="radio"
+                   id="active"
+                   name="Status"
+                   value="1"
+                   {% if student_obj.Status == "1" %}checked{% endif %}>
+            <label for="active">Active</label>
+
+            &nbsp;&nbsp;
+
+            <input type="radio"
+                   id="inactive"
+                   name="Status"
+                   value="0"
+                   {% if student_obj.Status == "0" %}checked{% endif %}>
+            <label for="inactive">Inactive</label>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Update Student Info
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

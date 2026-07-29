@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+@media print{
+
+    body{
+        background:white !important;
+    }
+
+    .no-print{
+        display:none !important;
+    }
+
+    nav,
+    footer,
+    .navbar{
+        display:none !important;
+    }
+
+    #printArea{
+        width:100%;
+        margin:0;
+        padding:0;
+    }
+
+}
+
+</style>
+
+<div class="container mt-5">
+
+    <div class="text-end mb-3 no-print">
+
+        <button
+            class="btn btn-primary"
+            onclick="printResult()">
+
+            🖨 Print Result
+
+        </button>
+
+        <a href="{% url 'student_login' %}" class="btn btn-secondary">
+
+            Logout
+
+        </a>
+
+    </div>
+
+    <div class="card shadow" id="printArea">
+
+        <div class="card-header bg-success text-white">
+
+            <h3 class="text-center">
+
+                Student Result
+
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <h5 class="mb-3">
+
+                Student Information
+
+            </h5>
+
+            <table class="table table-bordered">
+
+                <tr>
+
+                    <th width="30%">Student Name</th>
+
+                    <td>{{ student.name }}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Roll ID</th>
+
+                    <td>{{ student.roll_id }}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Class</th>
+
+                    <td>{{ student.Student_class }}</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Email</th>
+
+                    <td>{{ student.Email }}</td>
+
+                </tr>
+
+            </table>
+
+            <h5 class="mt-4">
+
+                Subject Results
+
+            </h5>
+
+            <table class="table table-bordered table-striped">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>S.no</th>
+
+                        <th>Subject</th>
+
+                        <th>Marks</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for result in results %}
+
+                    <tr>
+
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>{{ result.subjects.subject_name }}</td>
+
+                        <td>{{ result.marks }}</td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="3" class="text-center">
+
+                            No Results Found
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function printResult(){
+
+    var printContents =
+        document.getElementById("printArea").innerHTML;
+
+    var originalContents =
+        document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+
+    location.reload();
+
+}
+
+</script>
+
+{% endblock %}
