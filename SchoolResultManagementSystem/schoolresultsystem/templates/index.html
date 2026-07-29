@@ -9,19 +9,52 @@
     </header>
 
     <section class="py-5">
-      <div class="container">
+    <div class="container">
+
         <h2 class="text-center mb-4">Notice Board</h2>
+
         <div class="bg-light p-4 rounded shadow">
-        <ul class="list-unstyled mb-0">
-          <marquee direction="up" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();">
-            <li>Result for the academic year 2023-2024 will be published on 15th June 2024.</li>
-            <li>Students are advised to check their results online using their roll numbers.</li>
-            <li>For any discrepancies in the results, students can contact the administration office within 7 days of result publication.</li>
-            <li>Addmission forms are now available for the academic year 2025-2026.</li>
-          </marquee>
-        </ul>
-      </div>
-      </div>
-    </section>
+
+            <marquee direction="up"
+                     scrollamount="2"
+                     height="250"
+                     onmouseover="this.stop();"
+                     onmouseout="this.start();">
+
+                {% for notice in notices %}
+
+                    <div class="mb-3">
+
+                        <h5 class="text-primary">
+                            {{ notice.title }}
+                        </h5>
+
+                        <p>
+                            {{ notice.details }}
+                        </p>
+
+                        <small class="text-muted">
+                            Posted on:
+                            {{ notice.posting_date|date:"d M Y h:i A" }}
+                        </small>
+
+                        <hr>
+
+                    </div>
+
+                {% empty %}
+
+                    <p class="text-center">
+                        No Notices Available
+                    </p>
+
+                {% endfor %}
+
+            </marquee>
+
+        </div>
+
+    </div>
+</section>
     {% endblock %}
     

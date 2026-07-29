@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white text-center">
+
+                    <h3>Student Login</h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <label>Roll ID</label>
+
+                            <input
+                                type="text"
+                                name="roll_id"
+                                class="form-control"
+                                placeholder="Enter Roll ID"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label>Class</label>
+
+                            <select
+                                name="class"
+                                class="form-control"
+                                required>
+
+                                <option value="">Select Class</option>
+
+                                {% for c in classes %}
+
+                                <option value="{{ c.id }}">
+
+                                    {{ c.class_name }} - {{ c.section }}
+
+                                </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                        </div>
+
+                        <button class="btn btn-primary w-100">
+
+                            Login
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

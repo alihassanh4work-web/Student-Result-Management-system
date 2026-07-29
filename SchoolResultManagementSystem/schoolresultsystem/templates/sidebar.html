@@ -31,10 +31,10 @@
         <div class="collapse" id="classesMenu">
             <ul class="nav flex-column ms-3">
     <li class="nav-item">  
-        <a href="{% url 'Create_class' %}" class="nav-link">Create Class</a>
+        <a href="{% url 'create_class' %}" class="nav-link">Create Class</a>
     </li>
     <li class="nav-item">  
-        <a href="#" class="nav-link">Manage Class</a>
+        <a href="{% url 'manage_class' %}" class="nav-link">Manage Class</a>
     </li>
             </ul>
         </div>
@@ -45,16 +45,16 @@
         <div class="collapse" id="subjectsMenu">
             <ul class="nav flex-column ms-3">
     <li class="nav-item">  
-        <a href="#" class="nav-link">Create Subject</a>
+        <a href="{% url 'create_subject' %}" class="nav-link">Create Subject</a>
     </li>
     <li class="nav-item">  
-        <a href="#" class="nav-link">Manage Subject</a>
+        <a href="{% url 'manage_subject' %}" class="nav-link">Manage Subject</a>
     </li>
     <li class="nav-item">  
-        <a href="#" class="nav-link">subject combination</a>
+        <a href="{% url 'subject_combination' %}" class="nav-link">subject combination</a>
     </li>
     <li class="nav-item">  
-        <a href="#" class="nav-link">Manage combination</a>
+        <a href="{% url 'manage_subject_combination' %}" class="nav-link">Manage combination</a>
     </li>
             </ul>
         </div>
@@ -65,10 +65,10 @@
         <div class="collapse" id="studentsMenu">
             <ul class="nav flex-column ms-3">
     <li class="nav-item">  
-        <a href="#" class="nav-link">Create Student</a>
+        <a href="{% url 'Add_student' %}" class="nav-link">Create Student</a>
     </li>
     <li class="nav-item">  
-        <a href="#" class="nav-link">Manage Student</a>
+        <a href="{% url 'manage_student' %}" class="nav-link">Manage Student</a>
     </li>
             </ul>
         </div>
@@ -79,10 +79,10 @@
         <div class="collapse" id="resultsMenu">
             <ul class="nav flex-column ms-3">
     <li class="nav-item">  
-        <a href="#" class="nav-link">Create Result</a>
+        <a href="{% url 'Add_result' %}" class="nav-link">Create Result</a>
     </li>
     <li class="nav-item">  
-        <a href="#" class="nav-link">Manage Result</a>
+        <a href="{% url 'manage_result' %}" class="nav-link">Manage Result</a>
     </li>
             </ul>
         </div>
@@ -93,18 +93,21 @@
         <div class="collapse" id="noticeMenu">
             <ul class="nav flex-column ms-3">
     <li class="nav-item">  
-        <a href="#" class="nav-link">Create Notice</a>
+        <a href="{% url 'Add_Notice' %}" class="nav-link">Create Notice</a>
     </li>
     <li class="nav-item">  
-        <a href="#" class="nav-link">Manage Notice</a>
+        <a href="{% url 'manage_notice' %}" class="nav-link">Manage Notice</a>
     </li>
             </ul>
         </div>
     </li>
 
-     <li class="nav-item">  
-        <a href="#" class="nav-link">Change Password</a>
-    </li>
+     <li class="nav-item">
+    <a href="{% url 'change_password' %}" class="nav-link">
+        <i class="fas fa-key"></i>
+        Change Password
+    </a>
+</li>
 
 </ul>
 </nav>
